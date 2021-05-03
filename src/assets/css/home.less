@@ -1,0 +1,196 @@
+.content {
+  margin-top: 120px;
+  margin-bottom: 120px;
+}
+
+.content .content-title {
+  text-align: center;
+}
+
+.content .content-title h2 {
+  display: inline-block;
+  font-size: 36px;
+  color: #232323;
+  font-weight: 700;
+  background-image: -webkit-linear-gradient(
+      bottom,
+      #ffdfdf 25%,
+      transparent 0%
+  );
+  line-height: 1.55;
+  background-position: center bottom 8px;
+}
+
+.content .porpular {
+  margin: 20px 0 10px;
+  background-color: #ffffff;
+  height: 297.5px;
+  padding: 65px 55px;
+}
+
+.content .porpular .porpular-title {
+  margin-bottom: 30px;
+  font-family: "Spectral", serif;
+  font-weight: 600;
+}
+.content .porpular .porpular-list li {
+  margin-right: 15px;
+  margin-bottom: 15px;
+  padding: 5px;
+  background-color: #ffeeee;
+  color: #232323;
+  font-size: 12px;
+  cursor: pointer;
+}
+.content .comments {
+  margin: 20px 0 10px;
+  height: 297.5px;
+  background-color: #ffffff;
+  padding: 65px 55px;
+}
+
+.content .comments .comments-title {
+  margin-bottom: 30px;
+  font-family: "Spectral", serif;
+  font-weight: 600;
+}
+
+.content .comments .comments-list li {
+  padding: 3px 20px 0 0;
+  text-align: center;
+  color: #232323;
+  font-size: 12px;
+  cursor: pointer;
+}
+.content .comments .comments-list li .content-info
+{
+  color: #FF7171;
+  font-weight: 700;
+  font-family: "Spectral", serif;
+}
+
+.content .comments .comments-list li p {
+  text-align: start;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+/* 每日一句 */
+.content .sentence {
+  position: relative;
+  margin-top: 20px;
+  height: 613px;
+  overflow: hidden;
+}
+
+.content .sentence .bg-img {
+  width: 100%;
+  height: 100%;
+  background-image: url(../images/bg2.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  transition: all 0.5s ease;
+}
+.content .sentence:hover > .bg-img {
+  transform: scale(1.2) rotate(3deg);
+  transform-origin: center;
+}
+
+.content .sentence .bg-img::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 9;
+}
+
+.content .sentence .sentence-content {
+  position: absolute;
+  width: 70%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 9;
+}
+
+.content .sentence .sentence-content h3 {
+  color: #ff7171;
+  font-weight: 700;
+  font-family: "Spectral", serif;
+  font-size: 18px;
+}
+
+.content .sentence .sentence-content .content-item {
+  display: inline-block;
+  width: 100%;
+  color: #f3f3f3;
+  font-size: 26px;
+}
+
+.content .sentence .sentence-content .content-info {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: #f3f3f3;
+  list-style: none;
+}
+
+.content .blog .blog-content {
+  height: 200px;
+  background-color: aquamarine;
+}
+
+.article-list .article {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  position: relative;
+  height: 344px;
+  overflow: hidden;
+}
+
+.article-list .article .article-page {
+  padding: 40px;
+  height: 344px;
+  background-color: #ffffff;
+}
+.article-list .article .article-page .article-tag {
+  color: #ff7171;
+  font-weight: 700;
+  font-family: "Spectral", serif;
+  font-size: 18px;
+}
+.article-list .article .article-page .article-title {
+  font-size: 26px;
+  color: #232323;
+  font-weight: 700;
+}
+
+.article-list .article .article-page .article-content {
+  font-family: "Quicksand", sans-serif;
+  color: #7f7f7f;
+}
+.article-list .article .article-aside {
+  height: 344px;
+  overflow: hidden;
+}
+.article-list .article .article-aside .aside-bg {
+  height: 344px;
+  background-image: url(../images/bg3.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  transition: all 0.5s ease;
+}
+
+.article-list .article .article-aside .aside-bg:hover {
+  transform: scale(1.2) rotate(3deg);
+  transform-origin: center;
+}
