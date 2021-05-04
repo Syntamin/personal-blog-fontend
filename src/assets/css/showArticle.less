@@ -1,0 +1,50 @@
+.article {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    position: relative;
+    height: 344px;
+    overflow: hidden;
+
+    .article-page {
+        padding: 40px;
+        height: 344px;
+        background-color: #ffffff;
+
+        .article-tag {
+            color: #ff7171;
+            font-weight: 700;
+            font-family: "Spectral", serif;
+            font-size: 18px;
+        }
+
+        .article-title {
+            font-size: 26px;
+            color: #232323;
+            font-weight: 700;
+        }
+
+        .article-content {
+            font-family: "Quicksand", sans-serif;
+            color: #7f7f7f;
+        }
+    }
+
+    .article-aside {
+        height: 344px;
+        overflow: hidden;
+
+        .aside-bg {
+            height: 344px;
+            background-image: url(../images/bg3.jpg);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            transition: all 0.5s ease;
+        }
+
+        .aside-bg:hover {
+            transform: scale(1.2) rotate(3deg);
+            transform-origin: center;
+        }
+    }
+}
