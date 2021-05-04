@@ -1,14 +1,14 @@
 /*eslint-disable*/
 const path = require('path');
+const webpack = require("webpack")
 
 module.exports = {
-  lintOnSave: false,
-  configureWebpack: (config) => {
-    if (process.env.NODE_ENV === 'production') {
-      // 为生产环境修改配置...
-    } else {
-      config.devtool = 'cheap-module-eval-source-map';
-      config.mode = 'development';
-    }
-  },
-};
+	// 配置插件参数
+	configureWebpack: {
+		plugins: [
+			new webpack.ProvidePlugin({
+				'window.Quill': 'quill'
+			})
+		]
+	}
+}

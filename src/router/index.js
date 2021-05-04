@@ -35,6 +35,11 @@ const routes = [
     name: 'message',
     component: () => import('../views/Message.vue'),
   },
+  {
+    path: '/manage',
+    name: 'manage',
+    component: () => import('../views/manage.vue'),
+  },
 ];
 
 const router = createRouter({
