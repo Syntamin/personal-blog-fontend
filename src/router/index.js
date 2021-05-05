@@ -58,7 +58,25 @@ const routes = [
       {
         path: '/manage',
         name: 'manage',
+        redirect: { name: 'manageBlog' },
         component: () => import('../views/Manage.vue'),
+        children: [
+          {
+            path: 'manageBlog',
+            name: 'manageBlog',
+            component: () => import('../views/ManageBlog.vue'),
+          },
+          {
+            path: 'addBlog',
+            name: 'addBlog',
+            component: () => import('../views/AddBlog.vue'),
+          },
+          {
+            path: 'addDaySentence',
+            name: 'addDaySentence',
+            component: () => import('../views/AddDaySentence.vue'),
+          },
+        ],
       },
     ],
   },
