@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import font from '../views/layout/font.vue';
 import Home from '../views/Home.vue';
 
 const routes = [
@@ -17,33 +18,49 @@ const routes = [
   // },
   {
     path: '/',
-    name: 'Home',
-    component: Home,
+    name: 'font',
+    component: font,
+    redirect: '/home',
+    children: [
+      {
+        path: '/home',
+        name: 'Home',
+        component: Home,
+      },
+      {
+        path: '/map',
+        name: 'Map',
+        component: () => import('../views/Map.vue'),
+      },
+      {
+        path: '/about',
+        name: 'about',
+        component: () => import('../views/About.vue'),
+      },
+      {
+        path: '/message',
+        name: 'message',
+        component: () => import('../views/Message.vue'),
+      },
+    ],
   },
   {
-    path: '/map',
-    name: 'Map',
-    component: () => import('../views/Map.vue'),
-  },
-  {
-    path: '/about',
-    name: 'about',
-    component: () => import('../views/About.vue'),
-  },
-  {
-    path: '/message',
-    name: 'message',
-    component: () => import('../views/Message.vue'),
-  },
-  {
-    path: '/login',
-    name: 'login',
-    component: () => import('../views/Login.vue'),
-  },
-  {
-    path: '/manage',
-    name: 'manage',
-    component: () => import('../views/Manage.vue'),
+    path: '/end',
+    name: 'end',
+    redirect: '/login',
+    component: () => import('../views/layout/end.vue'),
+    children: [
+      {
+        path: '/login',
+        name: 'login',
+        component: () => import('../views/Login.vue'),
+      },
+      {
+        path: '/manage',
+        name: 'manage',
+        component: () => import('../views/Manage.vue'),
+      },
+    ],
   },
 ];
 
