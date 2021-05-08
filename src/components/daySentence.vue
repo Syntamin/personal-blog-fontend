@@ -3,12 +3,12 @@
     <div class="bg-img"></div>
     <div class="sentence-content">
       <h3>sentence</h3>
-      <span class="content-item"
-        >{{ sentence.content }}</span
-      >
+      <span class="content-item">{{ sentence.content }}</span>
       <ul class="content-info">
-        <li>whiteAlso</li>
-        <li class="info-time"><span>{{ sentence.c_time }}</span></li>
+        <li>{{ sentence.author }}</li>
+        <li class="info-time">
+          <span>{{ sentence.c_time }}</span>
+        </li>
       </ul>
     </div>
   </div>
@@ -16,20 +16,28 @@
 
 <script>
 import { reactive } from 'vue';
+import daySentence from '@/api/daySentence';
+import timeFormat from '@/utils/timeFormat';
 
-function setSentence(data) {
-  const sentence = reactive(data);
-  return { sentence };
-}
 export default {
   setup() {
-    // 接口获取数据
-    // to do
+    // 初始化数据
+    const sentence = reactive({
+      author: '',
+      content: '',
+      c_time: '',
+    });
+    // 获取每日一句内容
+    daySentence.querySentence().then((res) => {
+      /* eslint-disable */
+      const { content, c_time, author } = res.data;
+       /* eslint-able */
+      sentence.author = author;
+      sentence.content = content;
+      sentence.c_time = timeFormat.formatDate(c_time);
+    });
     return {
-      ...setSentence({
-        content: '很多遗憾，其实力所能及，只是因为没想到，事后就会格外遗憾',
-        c_time: '4 Nov 2021',
-      }),
+      sentence,
     };
   },
 };

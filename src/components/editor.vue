@@ -82,6 +82,10 @@ export default {
       default:
         'fullscreen undo redo restoredraft | cut copy paste pastetext | forecolor backcolor bold italic underline strikethrough link anchor | alignleft aligncenter alignright alignjustify outdent indent | styleselect formatselect fontselect fontsizeselect | bullist numlist | blockquote subscript superscript removeformat | table image media charmap hr pagebreak insertdatetime print preview | code selectall searchreplace visualblocks | indent2em lineheight formatpainter axupimgs',
     },
+    // 父组件触发获取输入的内容
+    isGetContent: {
+      type: Boolean,
+    },
   },
   data() {
     return {
@@ -149,6 +153,12 @@ export default {
     },
     contentValue(newValue) {
       this.$emit('input', newValue);
+    },
+    // 触发父组件监听获取数据事件
+    isGetContent() {
+      if (this.isGetContent) {
+        this.$emit('getContent', this.contentValue);
+      }
     },
   },
   created() {},
