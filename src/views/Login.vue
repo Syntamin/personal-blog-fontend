@@ -7,13 +7,19 @@
       :label-col="labelCol"
       :wrapper-col="wrapperCol"
     >
-      <a-form-item ref="name" label="账户" name="name" :label-col="{ span: 2 }">
-        <a-input v-model:value="formState.name" type="text"/>
+      <a-form-item
+        ref="name"
+        label="账户"
+        name="user_name"
+        :label-col="{ span: 2 }"
+      >
+        <a-input v-model:value="formState.user_name" type="text" />
       </a-form-item>
       <a-form-item
         has-feedback
         label="密码"
         name="password"
+        type="password"
         :label-col="{ span: 2 }"
       >
         <a-input
@@ -30,16 +36,17 @@
   </div>
 </template>
 <script>
-import {
-  defineComponent, reactive, ref, toRaw,
-} from 'vue';
+import { defineComponent, reactive, ref } from 'vue';
 import { message } from 'ant-design-vue';
+import Login from '@/api/login';
+import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
 
 export default defineComponent({
   setup() {
     const formRef = ref();
     const formState = reactive({
-      name: '',
+      user_name: '',
       password: '',
     });
     const rules = {
@@ -59,20 +66,48 @@ export default defineComponent({
       ],
     };
 
-    const onSubmit = () => {
+    // 初始化 vuex 以及 router
+    const store = useStore();
+    const router = useRouter();
+
+    // 提交login
+    const onSubmit = async () => {
       formRef.value
         .validate()
         .then(() => {
           // api 请求登录
-          message.success('登录成功');
-          console.log('values', formState, toRaw(formState));
+          Login.login({
+            user_name: formState.user_name,
+            password: formState.password,
+          })
+            .then((res) => {
+              // 获取到token，存储到 store and localStorage
+              if (res.code === 200 && res.data) {
+                store.dispatch('saveToken', res.data.token).then((resp) => {
+                  if (resp) {
+                    store.dispatch('saveLocalStorage', res.data.token).then((respon) => {
+                      if (respon) {
+                        message.info(res.msg);
+                        router.push({ name: 'manage' });
+                      }
+                    });
+                  }
+                });
+              } else {
+                message.info(res.msg);
+              }
+            })
+            .catch((error) => {
+              message.info(error);
+            });
         })
-        .catch((error) => {
-          message.error('登录失败');
-          console.log('error', error);
+        .catch(() => {
+          message.info('请输入正确的格式');
+          // console.log('error', error);
         });
     };
 
+    // 重置
     const resetForm = () => {
       formRef.value.resetFields();
     };

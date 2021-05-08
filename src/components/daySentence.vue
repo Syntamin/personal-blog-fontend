@@ -31,7 +31,7 @@ export default {
     daySentence.querySentence().then((res) => {
       /* eslint-disable */
       const { content, c_time, author } = res.data;
-       /* eslint-able */
+      /* eslint-able */
       sentence.author = author;
       sentence.content = content;
       sentence.c_time = timeFormat.formatDate(c_time);

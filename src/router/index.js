@@ -1,21 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import store from '@/store/index';
 import font from '../views/layout/font.vue';
 import Home from '../views/Home.vue';
 
 const routes = [
-  // {
-  //   path: '/',
-  //   name: 'Home',
-  //   component: Home,
-  // },
-  // {
-  //   path: '/about',
-  //   name: 'About',
-  //   // route level code-splitting
-  //   // this generates a separate chunk (about.[hash].js) for this route
-  //   // which is lazy-loaded when the route is visited.
-  //   component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
-  // },
   {
     path: '/',
     name: 'font',
@@ -85,6 +73,29 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
+});
+
+// 验证权限
+router.beforeEach((to, from, next) => {
+  const token = localStorage.getItem('token');
+  if (to.name === 'login') {
+    // 登录页面
+    if (store.state.token !== '' && token === store.state.token) {
+      next({ name: 'manage' });
+    } else {
+      next();
+    }
+  } else if (to.matched[0].path === '/end') {
+    // 将要进入管理后台的非登录页面
+    if (store.state.token !== '' && token === store.state.token) {
+      next();
+    } else {
+      next({ name: 'login' });
+    }
+  } else {
+    // 前台页面
+    next();
+  }
 });
 
 export default router;

@@ -22,13 +22,18 @@
 <script>
 import editor from '@/components/editor.vue';
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 import daySentence from '@/api/daySentence';
+import { message } from 'ant-design-vue';
 
 export default {
   components: {
     editor,
   },
   setup() {
+    // init
+    const router = useRouter();
+
     // input
     const authorRef = ref('');
 
@@ -42,9 +47,14 @@ export default {
           content: value,
         })
         .then((res) => {
-          console.log(res);
-          // 重置触发状态
-          isGetContentRef.value = false;
+          if (res.code === 200 && res.data) {
+            message.info('添加成功');
+            // 重置触发状态
+            isGetContentRef.value = false;
+          } else {
+            message.info(res.msg);
+            router.push({ name: 'login' });
+          }
         });
     }
 
