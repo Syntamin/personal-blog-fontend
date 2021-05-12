@@ -9,5 +9,6 @@ import router from './router';
 import store from './store';
 import 'ant-design-vue/dist/antd.css';
 
-createApp(App).use(Antd).use(store).use(router)
+createApp(App).use(Antd).use(store)
+  .use(router)
   .mount('#app');

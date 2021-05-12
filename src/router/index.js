@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import store from '@/store/index';
+// import store from '@/store/index';
+// import { message } from 'ant-design-vue';
 import font from '../views/layout/font.vue';
 import Home from '../views/Home.vue';
 
@@ -29,6 +30,11 @@ const routes = [
         path: '/message',
         name: 'message',
         component: () => import('../views/Message.vue'),
+      },
+      {
+        path: '/article/:id',
+        name: 'artilce',
+        component: () => import('../views/Article.vue'),
       },
     ],
   },
@@ -76,26 +82,42 @@ const router = createRouter({
 });
 
 // 验证权限
-router.beforeEach((to, from, next) => {
-  const token = localStorage.getItem('token');
-  if (to.name === 'login') {
-    // 登录页面
-    if (store.state.token !== '' && token === store.state.token) {
-      next({ name: 'manage' });
-    } else {
-      next();
-    }
-  } else if (to.matched[0].path === '/end') {
-    // 将要进入管理后台的非登录页面
-    if (store.state.token !== '' && token === store.state.token) {
-      next();
-    } else {
-      next({ name: 'login' });
-    }
-  } else {
-    // 前台页面
-    next();
-  }
-});
+// router.beforeEach((to, from, next) => {
+//   const token = localStorage.getItem('token');
+//   // console.log(to, 'to');
+//   // console.log(from, 'from');
+//   // console.log(token);
+//   // console.log(store.state.token);
+
+//   if (to.name === 'login') {
+//     if (!store.state.token) {
+//       // 将要转向登录页面
+//       // 1. 其他页面转向登录页面， / -> login
+//       if (token) {
+//         next({ name: '/manage' });
+//       } else {
+//         next();
+//       }
+//       // 2. 其他页面转向登录页面，/manage -> login
+//       next();
+//     } else {
+//       // 2. 登录状态下从管理页面转向登录页面
+//       next({ name: 'manage' });
+//     }
+//   } else if (to.matched[1].path === '/manage' && from.matched[1].path === '/manage') {
+//     // 后台管理界面
+//     if (token !== '' && store.state.token !== '' && token === store.state.token) {
+//       // 1. 后台管理界面之间的跳转验证token
+//       next();
+//     } else {
+//       // 2. 身份验证失败，跳转回登录界面
+//       message.error('身份验证失败，请重新登录');
+//       next({ name: 'login' });
+//     }
+//   } else {
+//   // 前台页面
+//     next();
+//   }
+// });
 
 export default router;

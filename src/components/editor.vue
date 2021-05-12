@@ -158,6 +158,7 @@ export default {
     isGetContent() {
       if (this.isGetContent) {
         this.$emit('getContent', this.contentValue);
+        this.clear();
       }
     },
   },

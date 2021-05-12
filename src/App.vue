@@ -17,7 +17,7 @@ export default {
 
 <style lang="less">
 body {
-  background-color: #f9f9f9;
+  background-color: #f9f9f9 !important;
   font-family: "Quicksand", sans-serif;
 }
 </style>

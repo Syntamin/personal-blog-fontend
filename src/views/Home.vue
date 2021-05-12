@@ -10,24 +10,11 @@
       </div>
       <div class="col-sm-4">
         <daySentence />
-        <!-- <div class="sentence">
-          <div class="bg-img"></div>
-          <div class="sentence-content">
-            <h3>sentence</h3>
-            <span class="content-item"
-              >很多遗憾，其实力所能及，只是因为没想到，事后就会格外遗憾</span
-            >
-            <ul class="content-info">
-              <li>whiteAlso</li>
-              <li class="info-time"><span>4 Nov 2021</span></li>
-            </ul>
-          </div>
-        </div> -->
       </div>
     </div>
     <div class="article-list">
       <showArticle
-        v-for="article in articleList"
+        v-for="article in blogListRef"
         :key="article.c_time"
         :article="article"
       />
@@ -42,17 +29,8 @@ import porpular from '@/components/porpular.vue';
 import newComments from '@/components/newComments.vue';
 import showArticle from '@/components/showArticle.vue';
 import daySentence from '@/components/daySentence.vue';
-import { reactive } from 'vue';
-
-/**
- * 设置articleList的值
- */
-function setArticleList(list) {
-  const articleList = reactive(list);
-  return {
-    articleList,
-  };
-}
+import { ref } from 'vue';
+import api from '@/api/blog';
 
 export default {
   components: {
@@ -62,33 +40,21 @@ export default {
     daySentence,
   },
   setup() {
+    // 文章列表
+    const blogListRef = ref([]);
+
+    api.getBlogList({
+      page: 1,
+      limit: 10,
+    }).then((res) => {
+      if (res.code === 200) {
+        res.data.forEach((item) => {
+          blogListRef.value.push(item);
+        });
+      }
+    });
     return {
-      ...setArticleList([
-        {
-          tags: 'Love',
-          title: 'A Funny Thing That Happens In Relationships',
-          c_time: '2 Feb 2021 344',
-          content:
-            'Integer at faucibus urna. Nullam condimentum leo id elit sagittis auctor. Curabitur elementum nunc...',
-          bg: 'http://www.baidu.com',
-        },
-        {
-          tags: 'Love',
-          title: 'A Funny Thing That Happens In Relationships',
-          c_time: '2 Feb 2021 344',
-          content:
-            'Integer at faucibus urna. Nullam condimentum leo id elit sagittis auctor. Curabitur elementum nunc...',
-          bg: 'http://www.baidu.com',
-        },
-        {
-          tags: 'Love',
-          title: 'A Funny Thing That Happens In Relationships',
-          c_time: '2 Feb 2021 344',
-          content:
-            'Integer at faucibus urna. Nullam condimentum leo id elit sagittis auctor. Curabitur elementum nunc...',
-          bg: 'http://www.baidu.com',
-        },
-      ]),
+      blogListRef,
     };
   },
 };
