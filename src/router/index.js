@@ -37,7 +37,7 @@ const routes = [
         component: () => import('../views/Article.vue'),
       },
       {
-        path: '/article/:tag',
+        path: '/articleList/:tag',
         name: 'articleList',
         component: () => import('../views/blogList.vue'),
       },

@@ -21,12 +21,12 @@ export default {
   setup() {
     // init
     const route = useRoute();
-
     const blogListRef = ref([]);
 
     api.getBlogByTag({ tag: route.params.tag, limit: 10, page: 1 }).then((res) => {
       if (res.code === 200) {
         blogListRef.value = res.data;
+        console.log(blogListRef.value);
       }
     });
     return {

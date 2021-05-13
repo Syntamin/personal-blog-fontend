@@ -21,6 +21,6 @@ export default {
 
   // 根据标签获取文章
   async getBlogByTag(params) {
-    return axios.get('/blog/articleListByTag', { params: { ...params } });
+    return axios.get('/blog/articleListByTag', { params });
   },
 };
