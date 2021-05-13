@@ -36,6 +36,11 @@ const routes = [
         name: 'artilce',
         component: () => import('../views/Article.vue'),
       },
+      {
+        path: '/article/:tag',
+        name: 'articleList',
+        component: () => import('../views/blogList.vue'),
+      },
     ],
   },
   {

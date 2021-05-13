@@ -49,7 +49,8 @@
       </div>
     </nav>
   </div>
-  <router-view />
+  <router-view class="content"/>
+  <div class="bottom"></div>
   <footer class="fixed-bottom">
     <div class="container">
       <div class="row d-flex">
@@ -116,4 +117,10 @@
 
 <style scoped lang="less">
 @import "../../assets/css/font.less";
+.content {
+  margin-bottom: 120px
+}
+.bottom {
+  height: 120px;
+}
 </style>

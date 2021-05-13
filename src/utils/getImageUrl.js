@@ -5,7 +5,7 @@ import axios from 'axios';
  */
 export default {
   async getImageUrl() {
-    const index = Math.ceil(Math.random() * 7);
+    const index = Math.ceil(Math.random() * 8);
     return axios.get(`/api/?resolution=1920&format=json&index=${index}&mkt=zh-CN`);
   },
 };

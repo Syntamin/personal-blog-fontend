@@ -18,4 +18,9 @@ export default {
     const result = axios.get('/blog/article', { params: { blogId } });
     return result;
   },
+
+  // 根据标签获取文章
+  async getBlogByTag(params) {
+    return axios.get('/blog/articleListByTag', { params: { ...params } });
+  },
 };
